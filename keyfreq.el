@@ -231,9 +231,9 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 
   (let* ((table (keyfreq-table-load (copy-hash-table keyfreq-table)))
 	 (lst (keyfreq-list
-		(cond
-		 (major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
-		 (t (keyfreq-groups-major-modes table)))))
+	       (cond
+		(major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
+		(t (keyfreq-groups-major-modes table)))))
 	 (formatted-list (keyfreq-format-list lst t)))
 
     (with-current-buffer (get-buffer-create keyfreq-buffer)
@@ -422,12 +422,12 @@ TABLE defaults to `keyfreq-table'."
     (if (eq (keyfreq-file-owner) (emacs-pid))
 	(unwind-protect
 	    (prog2
-	      ;; Load values and merge them with the current keyfreq-table
-	      (keyfreq-table-load table)
+		;; Load values and merge them with the current keyfreq-table
+		(keyfreq-table-load table)
 
-	      ;; Write the new frequencies
-	      (with-temp-file keyfreq-file
-		(prin1 (cdr (keyfreq-list table 'no-sort)) (current-buffer)))
+		;; Write the new frequencies
+		(with-temp-file keyfreq-file
+		  (prin1 (cdr (keyfreq-list table 'no-sort)) (current-buffer)))
 	      (clrhash table))
 
 	  ;; Release the lock and reset the hash table.
