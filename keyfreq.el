@@ -1,25 +1,41 @@
 ;;; keyfreq.el --- track command frequencies
 ;;
+;; Copyright 2012 Daniel Hackney
 ;; Copyright 2009-2010 by David Capello
 ;; Copyright 2008 by Xah Lee
 ;; Copyright 2006 by Michal Nazarewicz
 ;; Copyright 2006 by Ryan Yeske
 ;;
-;; Author: Ryan Yeske, Michal Nazarewicz (mina86/AT/mina86.com)
-;; URL: http://code.google.com/p/ergoemacs/source/browse/trunk/packages/keyfreq.el
-;; Version: 0.0.3
+;; Author: Ryan Yeske
+;;     Michal Nazarewicz (mina86/AT/mina86.com)
+;;     Daniel Hackney <dan@haxney.org>
+;; URL: https://github.com/jasonblewis/keyfreq.el
+;; Version: 0.0.4
 ;; Package-Requires: ((json "1.2"))
-;; Maintainer: David Capello, Xah lee
+;; Maintainer: David Capello
+;;     Xah lee
 ;; Created: 2006
-;;
-;; added to marmalade by Jason Lewis (jason at dickson dot st) 18/05/11
-;; avalaible on github https://github.com/jasonblewis/keyfreq.el
-;;
+
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 2 of the
 ;; License, or (at your option) any later version.
+
+;;; Commentary:
+
+;; Include the following lines in your .emacs file:
 ;;
+;;   (require 'keyfreq)
+;;   (keyfreq-mode 1)
+;;   (keyfreq-autosave-mode 1)
+;;
+;; And use keyfreq-show to see how many times you used a command.
+
+;;; Change Log:
+
+;; added to marmalade by Jason Lewis (jason at dickson dot st) 18/05/11
+;; avalaible on github https://github.com/jasonblewis/keyfreq.el
+
 ;; Version 1.4 - 2010-09 - David Capello
 ;; * Renamed from command-frequency to keyfreq
 ;; * Now keyfreq-table holds "deltas"
@@ -51,20 +67,8 @@
 ;;
 ;; Version 0.1 - 2006
 ;; - First version by Ryan Yeske. A quick hack of about 40 lines.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; HOW TO USE IT?
-;;
-;; Include the following lines in your .emacs file:
-;;
-;;   (require 'keyfreq)
-;;   (keyfreq-mode 1)
-;;   (keyfreq-autosave-mode 1)
-;;
-;; And use keyfreq-show to see how many times you used a command.
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Code:
 
 (defgroup keyfreq nil
   "Customization group for keyfreq mode.  This mode stores
