@@ -12,9 +12,9 @@
 ;; Package-Requires: ((json "1.2"))
 ;; Maintainer: David Capello, Xah lee
 ;; Created: 2006
-;; 
+;;
 ;; added to marmalade by Jason Lewis (jason at dickson dot st) 18/05/11
-;; avalaible on github https://github.com/jasonblewis/keyfreq.el 
+;; avalaible on github https://github.com/jasonblewis/keyfreq.el
 ;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -229,21 +229,21 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 
   (let* ((table (keyfreq-table-load (copy-hash-table keyfreq-table)))
 (list (keyfreq-list
-                (cond
-                 (major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
-                 (t (keyfreq-groups-major-modes table)))))
-         (formatted-list (keyfreq-format-list list t)))
+		(cond
+		 (major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
+		 (t (keyfreq-groups-major-modes table)))))
+	 (formatted-list (keyfreq-format-list list t)))
 
     (with-current-buffer (get-buffer-create keyfreq-buffer)
       (setq buffer-read-only t)
       ;; Display the table
       (let ((inhibit-read-only t))
-        (insert
-         (if major-mode-symbol
-             (concat "For " (symbol-name major-mode))
-           (concat "For all major modes"))
-         ":\n\n"
-         formatted-list)))
+	(insert
+	 (if major-mode-symbol
+	     (concat "For " (symbol-name major-mode))
+	   (concat "For all major modes"))
+	 ":\n\n"
+	 formatted-list)))
     ))
 
 
