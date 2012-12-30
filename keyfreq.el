@@ -442,10 +442,10 @@ The table is not reset, so the values are appended to the table."
 		 (read (current-buffer)))))
 
 	;; Add the values in the table
-	(while (and (listp l) l)
-	  (if (listp (car l))
-	      (puthash (caar l) (+ (gethash (caar l) table 0) (cdar l)) table))
-	  (setq l (cdr l))))))
+	(mapc (lambda (i)
+		(puthash (car i) (+ (gethash (car i) table 0) (cdr i)) table))
+	      l)))
+  table)
 
 
 (define-minor-mode keyfreq-autosave-mode
