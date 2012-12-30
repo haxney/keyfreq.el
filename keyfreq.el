@@ -238,16 +238,18 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 	 (formatted-list (keyfreq-format-list lst t)))
 
     (with-current-buffer (get-buffer-create keyfreq-buffer)
-      (erase-buffer)
       (view-mode)
       ;; Display the table
       (let ((inhibit-read-only t))
+	(erase-buffer)
 	(insert
 	 (if major-mode-symbol
 	     (concat "For " (symbol-name major-mode))
 	   (concat "For all major modes"))
 	 ":\n\n"
-	 formatted-list)))))
+	 formatted-list))
+      (goto-char (point-min))
+      (display-buffer (current-buffer)))))
 
 
 (defun keyfreq-html (filename &optional confirm)
