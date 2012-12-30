@@ -107,6 +107,7 @@ by default."
   :group 'keyfreq
   :type 'file)
 
+
 (defcustom keyfreq-file-lock "~/.emacs.keyfreq.lock"
   "Lock file to update the `keyfreq-file'."
   :group 'keyfreq
@@ -494,4 +495,5 @@ value will take effect only after (re)enabling
 
 
 (provide 'keyfreq)
+
 ;;; keyfreq.el ends here
