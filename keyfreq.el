@@ -405,10 +405,14 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
   (not (file-exists-p keyfreq-file-lock)))
 
 
-(defun keyfreq-table-save (table)
+(defun keyfreq-table-save (&optional table)
   "Appends all values from the specified TABLE into the
 `keyfreq-file' as a sexp of an alist. Then resets the TABLE
-if it was successfully merged."
+if it was successfully merged.
+
+TABLE defaults to `keyfreq-table'."
+  (interactive)
+  (setq table (or table keyfreq-table))
 
   ;; Check that the lock file does not exist
   (when (keyfreq-file-is-unlocked)
@@ -468,9 +472,9 @@ and when emacs is killed."
       (progn
 	(setq keyfreq-autosave--timer
 	      (run-at-time t keyfreq-autosave-timeout
-			   'keyfreq-autosave--do))
-	(add-hook 'kill-emacs-hook 'keyfreq-autosave--do))
-    (remove-hook 'kill-emacs-hook 'keyfreq-autosave--do)))
+			   'keyfreq-table-save))
+	(add-hook 'kill-emacs-hook 'keyfreq-table-save))
+    (remove-hook 'kill-emacs-hook 'keyfreq-table-save)))
 
 
 (defcustom keyfreq-autosave-timeout 600
@@ -483,11 +487,6 @@ value will take effect only after (re)enabling
 
 
 (defvar keyfreq-autosave--timer nil)
-
-
-(defun keyfreq-autosave--do ()
-  "Function executed periodically to save the `keyfreq-table' in `keyfreq-file'."
-  (keyfreq-table-save keyfreq-table))
 
 
 (provide 'keyfreq)
