@@ -1,4 +1,4 @@
-;;; keyfreq.el --- track command frequencies
+;;; keyfreq.el --- Track command frequencies
 ;;
 ;; Copyright 2012 Daniel Hackney
 ;; Copyright 2009-2010 by David Capello
@@ -9,11 +9,12 @@
 ;; Author: Ryan Yeske
 ;;     Michal Nazarewicz (mina86/AT/mina86.com)
 ;;     Daniel Hackney <dan@haxney.org>
-;; URL: https://github.com/jasonblewis/keyfreq.el
-;; Version: 0.0.4
+;; URL: https://github.com/haxney/keyfreq.el
+;; Version: 1.5
 ;; Package-Requires: ((json "1.2"))
 ;; Maintainer: David Capello
 ;;     Xah lee
+;;     Daniel Hackney <dan@haxney.org>
 ;; Created: 2006
 
 ;; This program is free software; you can redistribute it and/or
@@ -33,8 +34,13 @@
 
 ;;; Change Log:
 
-;; added to marmalade by Jason Lewis (jason at dickson dot st) 18/05/11
-;; avalaible on github https://github.com/jasonblewis/keyfreq.el
+;; Version 1.5 - 2012-12 - Daniel Hackney
+;; * Display frequencies in a `view-mode' buffer
+;; * `keyfreq-table-load' returns the loaded table
+;; * Add `autoload' declarations
+;; * `keyfreq-table-save' is interactive and defaults to saving `keyfreq-table'
+;; * `keyfreq-file' defaults to "~/.emacs.d/keyfreq"
+;; * Documentation and comment fixes
 
 ;; Version 1.4 - 2010-09 - David Capello
 ;; * Renamed from command-frequency to keyfreq
