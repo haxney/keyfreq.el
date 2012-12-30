@@ -227,24 +227,24 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
   (interactive (list (cond (current-prefix-arg major-mode)
 			   (t nil))))
 
-  (let ((table (copy-hash-table keyfreq-table)))
-    ;; Merge with the values in .emacs.keyfreq file
-    (keyfreq-table-load table)
+  (let* ((table (keyfreq-table-load (copy-hash-table keyfreq-table)))
+(list (keyfreq-list
+                (cond
+                 (major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
+                 (t (keyfreq-groups-major-modes table)))))
+         (formatted-list (keyfreq-format-list list t)))
 
-    (let* ((list (keyfreq-list
-		  (cond
-		   (major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
-		   (t (keyfreq-groups-major-modes table)))))
-	   (formatted-list (keyfreq-format-list list t)))
-
+    (with-current-buffer (get-buffer-create keyfreq-buffer)
+      (setq buffer-read-only t)
       ;; Display the table
-      (display-message-or-buffer (concat (if major-mode-symbol
-					     (concat "For " (symbol-name major-mode))
-					   (concat "For all major modes"))
-					 ":\n\n"
-					 formatted-list)
-				 keyfreq-buffer)
-      )))
+      (let ((inhibit-read-only t))
+        (insert
+         (if major-mode-symbol
+             (concat "For " (symbol-name major-mode))
+           (concat "For all major modes"))
+         ":\n\n"
+         formatted-list)))
+    ))
 
 
 (defun keyfreq-html (filename &optional confirm)
