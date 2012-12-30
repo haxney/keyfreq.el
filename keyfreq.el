@@ -23,13 +23,13 @@
 
 ;;; Commentary:
 
-;; Include the following lines in your .emacs file:
+;; Install as a package, either from a package archive, or using
+;; `package-install-from-buffer'. Enable `keyfreq-mode' to start recording
+;; command frequencies and `keyfreq-autosave-mode' to save the frequencies on a
+;; timer. Both can be activated through `customize', which will autoload keyfreq
+;; if necessary.
 ;;
-;;   (require 'keyfreq)
-;;   (keyfreq-mode 1)
-;;   (keyfreq-autosave-mode 1)
-;;
-;; And use keyfreq-show to see how many times you used a command.
+;; Use `keyfreq-show' to see how many times you used a command.
 
 ;;; Change Log:
 
@@ -79,14 +79,12 @@ a statistical data."
   :prefix "keyfreq")
 
 
+;;;###autoload
 (define-minor-mode keyfreq-mode
   "Keyfreq mode records number of times each command was
 called making it possible to access usage statistics through
 various keyfreq-* functions."
   :global t
-  :init-value nil
-  :lighter nil
-  :keymap nil
   :group 'keyfreq
 
   (if keyfreq-mode
@@ -217,6 +215,7 @@ called, percentage usage and the command."
      (cdr list) "")))
 
 
+;;;###autoload
 (defun keyfreq-show (&optional major-mode-symbol)
   "Shows command usage statistics in `keyfreq-buffer' using
 `keyfreq-string' function.
@@ -454,14 +453,12 @@ The table is not reset, so the values are appended to the table."
   table)
 
 
+;;;###autoload
 (define-minor-mode keyfreq-autosave-mode
   "Keyfreq Autosave mode automatically saves
 `keyfreq-table' every `keyfreq-autosave-timeout' seconds
 and when emacs is killed."
   :global t
-  :init-value nil
-  :lighter nil
-  :keymap nil
   :group 'keyfreq
 
   (when keyfreq-autosave--timer
