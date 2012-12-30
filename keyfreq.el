@@ -247,8 +247,7 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 	     (concat "For " (symbol-name major-mode))
 	   (concat "For all major modes"))
 	 ":\n\n"
-	 formatted-list)))
-    ))
+	 formatted-list)))))
 
 
 (defun keyfreq-html (filename &optional confirm)
@@ -308,9 +307,7 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 	 (funcall htmltable (keyfreq-list (keyfreq-filter-major-mode table major-mode-symbol))))
        (keyfreq-used-major-modes table))
 
-      (insert "</body>\n</html>\n")
-      )
-    ))
+      (insert "</body>\n</html>\n"))))
 
 
 (defun keyfreq-json-encode (table)
@@ -325,8 +322,7 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
      (lambda (command-symbol counter)
        (add-to-list 'commands-list command-symbol t)
        (puthash command-symbol i commands-indexes)
-       (setq i (+ i 1))
-       )
+       (setq i (+ i 1)))
      (keyfreq-groups-major-modes table))
 
     ;; Build the "frequencies" property.
@@ -430,8 +426,7 @@ if it was successfully merged."
 
 	  ;; Release the lock and reset the hash table.
 	  (keyfreq-file-release-lock)
-	  (clrhash table))
-      )))
+	  (clrhash table)))))
 
 
 (defun keyfreq-table-load (table)
@@ -450,8 +445,7 @@ The table is not reset, so the values are appended to the table."
 	(while (and (listp l) l)
 	  (if (listp (car l))
 	      (puthash (caar l) (+ (gethash (caar l) table 0) (cdar l)) table))
-	  (setq l (cdr l)))
-	)))
+	  (setq l (cdr l))))))
 
 
 (define-minor-mode keyfreq-autosave-mode
