@@ -1,5 +1,4 @@
 ;;; keyfreq.el --- track command frequencies
-;; -*- coding: utf-8 -*-
 ;;
 ;; Copyright 2009-2010 by David Capello
 ;; Copyright 2008 by Xah Lee
