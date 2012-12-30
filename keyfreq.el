@@ -422,17 +422,17 @@ TABLE defaults to `keyfreq-table'."
     ;; Check that we have the lock
     (if (eq (keyfreq-file-owner) (emacs-pid))
 	(unwind-protect
-	    (progn
+	    (prog2
 	      ;; Load values and merge them with the current keyfreq-table
 	      (keyfreq-table-load table)
 
 	      ;; Write the new frequencies
 	      (with-temp-file keyfreq-file
-		(prin1 (cdr (keyfreq-list table 'no-sort)) (current-buffer))))
+		(prin1 (cdr (keyfreq-list table 'no-sort)) (current-buffer)))
+	      (clrhash table))
 
 	  ;; Release the lock and reset the hash table.
-	  (keyfreq-file-release-lock)
-	  (clrhash table)))))
+	  (keyfreq-file-release-lock)))))
 
 
 (defun keyfreq-table-load (table)
