@@ -238,7 +238,8 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 	 (formatted-list (keyfreq-format-list lst t)))
 
     (with-current-buffer (get-buffer-create keyfreq-buffer)
-      (setq buffer-read-only t)
+      (erase-buffer)
+      (view-mode)
       ;; Display the table
       (let ((inhibit-read-only t))
 	(insert
