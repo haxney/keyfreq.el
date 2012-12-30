@@ -153,18 +153,17 @@ hash table where each entry has COMMAND as key and COUNTER as value."
 
 
 (defun keyfreq-used-major-modes (table)
-  "Returns a list with the used major-modes (major modes
-contained in the TABLE)."
+  "Return a list with the used major-modes contained in TABLE."
 
-  (let ((list))
+  (let ((lst))
     (maphash (lambda (k v)
-	       (add-to-list 'list (car k)))
+	       (add-to-list 'lst (car k)))
 	     table)
-    list))
+    lst))
 
 
 (defun keyfreq-list (table &optional reverse limit)
-  "Returns a cons which car is sum of times any command was used
+  "Return a cons which car is sum of times any command was used
 and cdr is a list of (command . count) pairs.  If REVERSE is nil
 sorts it starting from the most used command; if it is 'no-sort
 the list is not sorted; if it is non-nil and not 'no-sort sorts
@@ -232,11 +231,11 @@ buffer is used as MAJOR-MODE-SYMBOL argument."
 			   (t nil))))
 
   (let* ((table (keyfreq-table-load (copy-hash-table keyfreq-table)))
-(list (keyfreq-list
+	 (lst (keyfreq-list
 		(cond
 		 (major-mode-symbol (keyfreq-filter-major-mode table major-mode-symbol))
 		 (t (keyfreq-groups-major-modes table)))))
-	 (formatted-list (keyfreq-format-list list t)))
+	 (formatted-list (keyfreq-format-list lst t)))
 
     (with-current-buffer (get-buffer-create keyfreq-buffer)
       (setq buffer-read-only t)
